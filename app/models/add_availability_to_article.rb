@@ -1,0 +1,2 @@
+class AddAvailabilityToArticle < ApplicationRecord
+end

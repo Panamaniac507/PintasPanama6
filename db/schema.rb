@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_19_092754) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_19_115748) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "add_availability_to_articles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "add_status_to_orders", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "articles", force: :cascade do |t|
     t.text "article_description"
@@ -20,6 +30,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_092754) do
     t.integer "stock_qty"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "availability", default: 0
   end
 
   create_table "order_articles", force: :cascade do |t|
@@ -46,6 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_092754) do
     t.integer "age"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
