@@ -1,0 +1,2 @@
+class AddStatusToOrder < ApplicationRecord
+end
