@@ -1,2 +1,17 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+  <div class="pic">
+    <%= image_tag("Webp.net-resizeimage.png") %>
+  </div>
+
+  <div class="slogan">
+    <h1>La Mejor Cerveza de Panama...a un Click!</h1>
+  </div>
+
+<div class="articles-link">
+<% if user_signed_in?  %>
+<%=  link_to "Articles", articles_path(@articles)%>
+<% end %>
+</div>
+
+<div class="sign-out-link">
+<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+</div>
