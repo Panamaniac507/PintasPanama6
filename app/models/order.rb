@@ -1,4 +1,5 @@
 class Order < ApplicationRecord
   belongs_to :user
-  belongs_to :order_article
+  has_many :order_articles
+  enum status: %i[paid notpaid]
 end

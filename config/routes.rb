@@ -9,10 +9,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  resources :order_articles
+  # resources :order_articles
   resources :articles
-  resources :orders, only: [:index, :show, :destroy]
+  # resources :orders, only: [:index, :show, :destroy]
   resources :orders do
-    resources :article, only: [:index, :show, :destroy]
+    resources :order_articles
   end
 end
