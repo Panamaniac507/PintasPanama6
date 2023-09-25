@@ -10,9 +10,11 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   # resources :order_articles
-  resources :articles
+  resources :articles do
+    resources :order_articles
+  end
   # resources :orders, only: [:index, :show, :destroy]
   resources :orders do
-    resources :order_articles
+    resources :order_articles, only: [:new, :create, :show, :index]
   end
 end
