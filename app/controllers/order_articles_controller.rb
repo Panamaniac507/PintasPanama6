@@ -1,11 +1,11 @@
 class OrderArticlesController < ApplicationController
 
   def index
-    @order_articles = Article.all
+    @order_articles = Order_article.all
   end
 
   def show
-    @order_article = Article.find(params[:id])
+    @order_article = Order_article.find(params[:id])
   end
 
   def new
@@ -14,12 +14,12 @@ class OrderArticlesController < ApplicationController
   end
 
   def create
-    @order_article = Order_article.new(order_articles_params)
-    @order_article.order.user = current_user
+    @article = Article.find(params[:article_id])
+    @order_article = @order.order_article.create!(order_articles_params)
     if @order_article.save
-      redirect_to order_articles_path(@user)
+      redirect_to order_articles_path(@order_article), notice: 'Article was added to order'
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity, alert: 'Failed to add article to order'
     end
   end
 
