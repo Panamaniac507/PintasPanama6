@@ -1,14 +1,14 @@
 <div class="container">
     <% @articles.each do |article| %>
 
-        <div class="card">
+        <%# <div class="card"> %>
                 <h3><div><%= article.article_description %></div></h3>
                 <h3><div>Price <%= article.price %></div></h3>
                 <%# set up enum later...do NOT forget! %>
                  <h3><div><%#= article.availability %></div></h3>
                 <h3>Stock <div><%= article.stock_qty %></div></h3>
-               <div><%= link_to "Add to Order", order_path(:id)%></div>
-          </div>
+               <div><%= link_to " Add to cart", article_path(@article)%></div>
+          <%# </div> %>
 
     <% end %>
   </div>
