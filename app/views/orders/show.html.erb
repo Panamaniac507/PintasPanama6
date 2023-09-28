@@ -1,11 +1,7 @@
 
 
-  <div><%= order.sub_total %></div>
-  <div><%= order.shipping %></div>
-  <div><%= order.tax %></div>
-  <div><%= order.total %></div>
-  <div><%= order.address %></div>
-  <div><%= order.name %></div>
-  <div><%= order.last_name %></div>
-  <div><%= order.mobile %></div>
-  <div><%= order.age %></div>
+  <%= @order_articles.each do |order| %>
+
+  <h1><%= order.total  %> </h1>
+
+  <% end %>
