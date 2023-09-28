@@ -1,0 +1,7 @@
+<% @order_items.each do |item| %>
+
+    <h1><%= item.article.article_description %></h1>
+    <h1><%= item.article.price %></h1>
+    <h1>Subtotal: <%= item.total %></h1>
+
+<% end %>
