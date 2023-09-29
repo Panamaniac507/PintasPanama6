@@ -11,10 +11,10 @@ Rails.application.routes.draw do
   resources :articles
   # resources :order_articles
   resources :articles do
-    resources :order_articles
+    resources :order_articles, only: [:create, :new, :show]
   end
-  # resources :orders, only: [:index, :show, :destroy]
+  resources :orders, only: [:new, :create, :show]
   resources :orders do
-    resources :order_articles, only: [:create]
+    resources :order_articles, only: [:create, :new, :show]
   end
 end

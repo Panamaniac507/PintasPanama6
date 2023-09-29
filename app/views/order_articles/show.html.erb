@@ -1,8 +1,7 @@
-<%# <%= @orders %>
-<%= @order_articles %>
+<% @order_articles.each do |article| %>
 
-<%= @order_articles.each do |order| %>
+    <h1><%= article.article_description %></h1>
+    <h1><%= article.price %></h1>
+    <h1>Subtotal: <%= article.total %></h1>
 
-  <h1><%= order.total  %> </h1>
-
-  <% end %>
+<% end %>

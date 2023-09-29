@@ -4,18 +4,20 @@ class OrderArticlesController < ApplicationController
   #   @order_articles = OrderArticle.all
   # end
 
-  # def new
-  #   @order_article = OrderArticle.new
-  #   @current_user = current_user
-  # end
+  def new
+    @order_article = OrderArticle.new
+    @current_user = current_user
+  end
 
   def create
-    # @article = Article.find(params[:article_id])
+    @article = Article.find(params[:article_id])
+    @article = current_article
     @order = current_order
-    @order_article = @order.order_articles.new(order_article_params)
-    @order.save
-    @order_article.user = current_user
-    session[:order_id] = @order.id
+    @order_article = Order_article.new(order_article_params)
+    @order_article.save
+    @order_article.article = @article
+    @order_article.order.user = current_user
+    # session[:order_id] = @order.id
     if @order_article.save
       redirect_to order_articles_path(@order_article), notice: 'Article was added to order'
     else
@@ -44,6 +46,6 @@ class OrderArticlesController < ApplicationController
   private
 
   def order_article_params
-    params.require(:order_article).permit(:product_id, :quantity)
+    params.require(:order_article).permit(:order_id, :article_id, :quantity, :subtotal, :unit_price)
   end
 end

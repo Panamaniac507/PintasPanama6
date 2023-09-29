@@ -4,17 +4,12 @@ class Order < ApplicationRecord
   has_many :order_articles
   has_many :articles, through: :order_articles
   enum status: %i[paid notpaid]
-  # validates :name, presence: true
-  # validates :last_name, presence: true
-  # validates :mobile, presence: true
-  # validates :address, presence: true
-  # validates :age, presence: true, numericality: {greater_than: 17}
 
   #find_article selects the article to be placed in the order IF there is stock available
 
   #subtotal calculates the subtotal based on the article selected, quantity and price of such article
   def sub_total
-    order_articles.collect{|order_article| order_article.valid? ? order_article.unit_price * order_article.quantity : 0}.sum
+    order_articles.subtotal
   end
 
   def tax
