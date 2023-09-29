@@ -23,8 +23,12 @@ class OrderArticle < ApplicationRecord
     end
   end
 
-  def total
-      unit_price*quantity
+  def quantity
+    order_article.quantity
+  end
+
+  def subtotal
+    order_articles.collect{|order_article| order_article.valid? ? article.price * order_article.quantity : 0}.sum
   end
 
   private
@@ -33,7 +37,7 @@ class OrderArticle < ApplicationRecord
       self[:unit_price] = unit_price
   end
 
-  def set_total
-    self[:total] = total * quantity
+  def set_subtotal
+    self[:subtotal] = subtotal
   end
 end

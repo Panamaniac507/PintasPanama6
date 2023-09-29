@@ -10,19 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_28_020832) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_29_011618) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "add_availability_to_articles", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "add_status_to_orders", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "articles", force: :cascade do |t|
     t.text "article_description"
@@ -51,11 +41,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_28_020832) do
     t.float "shipping"
     t.float "tax"
     t.float "total"
-    t.text "address"
-    t.text "name"
-    t.text "last_name"
-    t.integer "mobile"
-    t.integer "age"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
