@@ -5,9 +5,9 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+Order.destroy_all
 Item.destroy_all
 User.destroy_all
-Order.destroy_all
 
 
 p "Seeding..."
@@ -22,4 +22,5 @@ item2 = Item.create!(description: "A very good stout", price: 3.50)
 item3 = Item.create!(description: "A very good dark beer", price: 4.50)
 item4 = Item.create!(description: "A very good IPA", price: 5.50)
 
+order1 = Order.create!(user_id: user1.id, item_id: item1.id, quantity: 5, sub_total: item1.price * 5, shipping: 10, tax: 0.10 * order1.sub_total, total: order1.sub_total + order1.tax + order1.shipping )
 p "Seeds done, dude...."

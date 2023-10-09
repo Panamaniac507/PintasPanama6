@@ -2,20 +2,12 @@ class Order < ApplicationRecord
   belongs_to :user
   belongs_to :item
 
-  before_save :set_unit_price
-  before_save :set_sub_total
-  before_save :set_total
-
-  def unit_price
-    if persisted?
-      self[:unit_price]
-    else
-      item.price
-    end
-  end
+  # def unit_price
+  #   item.price
+  # end
 
   def sub_total
-    order.collect{|order| order.valid? ? order.unit_price*order.quantity : 0}.sum
+    order.collect{|order| order.valid? ? order.item.price * order.quantity : 0}.sum
   end
 
   def tax
@@ -32,20 +24,6 @@ class Order < ApplicationRecord
 
   def total
     sub_total + tax + shipping
-  end
-
-  private
-
-  def set_unit_price
-    self[:unit_price] = unit_price
-  end
-
-  def set_sub_total
-    self[:sub_total] = sub_total
-  end
-
-  def set_total
-    self[:total] = total * quantity
   end
 
 end
