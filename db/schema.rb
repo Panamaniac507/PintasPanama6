@@ -10,40 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_29_011618) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_30_020400) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "articles", force: :cascade do |t|
-    t.text "article_description"
-    t.float "price"
-    t.integer "stock_qty"
+  create_table "items", force: :cascade do |t|
+    t.text "description"
+    t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "availability", default: 0
-  end
-
-  create_table "order_articles", force: :cascade do |t|
-    t.bigint "order_id", null: false
-    t.bigint "article_id", null: false
-    t.integer "quantity"
-    t.float "subtotal"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.decimal "unit_price"
-    t.index ["article_id"], name: "index_order_articles_on_article_id"
-    t.index ["order_id"], name: "index_order_articles_on_order_id"
   end
 
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.float "sub_total"
-    t.float "shipping"
-    t.float "tax"
-    t.float "total"
+    t.bigint "item_id", null: false
+    t.decimal "sub_total"
+    t.decimal "shipping"
+    t.decimal "tax"
+    t.decimal "total"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "status", default: 0
+    t.decimal "item_price"
+    t.integer "quantity"
+    t.index ["item_id"], name: "index_orders_on_item_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -59,7 +48,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_29_011618) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "order_articles", "articles"
-  add_foreign_key "order_articles", "orders"
+  add_foreign_key "orders", "items"
   add_foreign_key "orders", "users"
 end

@@ -1,0 +1,22 @@
+<% @items.each do |product| %>
+      <tr>
+        <td><%= item.description %></td>
+        <td><%= item.price %></td>
+        <td><%= link_to 'Show', order_path(items) %></td>
+
+
+
+        <td>
+
+
+          <%= form_for @order, remote: true  do |f|%>
+          <%= f.hidden_field :item_id, :value => item.id %>
+          <%= f.number_field :quantity, :value => 1, :min =>  1%>
+          <%= f.submit "Add to Cart "%>
+
+
+          <% end %>
+        </td>
+
+      </tr>
+    <% end %>

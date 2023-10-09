@@ -1,7 +1,16 @@
+<p>
+  <strong>Title:</strong>
+  <%= @item.description %>
+</p>
 
+<p>
+  <strong>Price:</strong>
+  <%= @item.price %>
+</p>
 
-  <%= @order_articles.each do |order| %>
+<p>
+  <strong>Total:</strong>
+  <%= item.total %>
+</p>
 
-  <h1><%= order.total  %> </h1>
-
-  <% end %>
+<%= link_to 'Back', root_path %>
