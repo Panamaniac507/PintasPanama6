@@ -1,21 +1,27 @@
 class Order < ApplicationRecord
   belongs_to :user
-  before_save :set_subtotal
-  has_many :order_articles
-  has_many :articles, through: :order_articles
-  enum status: %i[paid notpaid]
+  belongs_to :item
 
-  #find_article selects the article to be placed in the order IF there is stock available
+  before_save :set_unit_price
+  before_save :set_sub_total
+  before_save :set_total
 
-  #subtotal calculates the subtotal based on the article selected, quantity and price of such article
+  def unit_price
+    if persisted?
+      self[:unit_price]
+    else
+      item.price
+    end
+  end
+
   def sub_total
-    order_articles.subtotal
+    order.collect{|order| order.valid? ? order.unit_price*order.quantity : 0}.sum
   end
 
   def tax
-    sub_total*0.10
+    0.10 * sub_total
   end
-  #if the subtotal is greater than 20.00, then shipping is free, 5.00 otherwise
+
   def shipping
     if sub_total > 20.00
       0
@@ -30,7 +36,16 @@ class Order < ApplicationRecord
 
   private
 
-  def set_subtotal
-    self[:total] = total
+  def set_unit_price
+    self[:unit_price] = unit_price
   end
+
+  def set_sub_total
+    self[:sub_total] = sub_total
+  end
+
+  def set_total
+    self[:total] = total * quantity
+  end
+
 end

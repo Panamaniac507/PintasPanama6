@@ -1,55 +1,33 @@
 class OrdersController < ApplicationController
-  # before_action :set_order, only: %i[show]
-
-  # def show
-  #   @order_articles = current_user.order_articles
-  # end
-
-  # def index
-  #   @orders = Order.all
-  # end
-  def show
-    @order = Order.find(params[:id])
-    # @order = current_user.order
+  def index
+    @orders = Order.all
   end
 
-  def new
-    @order = Order.new
-    @current_user = current_user
-  end
+  # def new
+  #   @order = Order.new
+  #   @order.user = current_user
+  # end
 
   def create
+    @order = current_order
+    @item = Item.find(params[:item_id])
     @order = Order.new(order_params)
     @order.user = current_user
+    @order.item = @item
     if @order.save
-      redirect_to orders_path(@user)
+      redirect_to orders_path
     else
       render :new, status: :unprocessable_entity
     end
   end
 
-  # def update
-  #   # @article = Article.find(params[:id])
-  #   if @order.update(order_params)
-  #     redirect_to order_path(@order)
-  #   else
-  #     render :edit, status: :unprocessable_entity
-  #   end
-  # end
+  def show
 
-  # def destroy
-  #   # @article = Article.find(params[:id])
-  #   @order.destroy
-  #   redirect_to orders_path(@orders), status: :see_other
-  # end
+  end
 
   private
 
-  # def set_order
-  #   @order = Order.find(params[:id])
-  # end
-
   def order_params
-    params.require(:order).permit(:user_id, :sub_total, :shipping, :tax, :total, :status)
+    params.require(:order).permit(:user_id, :item_id, :sub_total, :shipping, :tax, :total)
   end
 end

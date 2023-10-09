@@ -5,10 +5,10 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-Article.destroy_all
+Item.destroy_all
 User.destroy_all
 Order.destroy_all
-OrderArticle.destroy_all
+
 
 p "Seeding..."
 
@@ -17,9 +17,9 @@ user1 = User.create!(
   password: 'password56'
 )
 
-article1 = Article.create!(article_description: "A very good lager", price: 2.50, availability: 1, stock_qty: 5)
-article2 = Article.create!(article_description: "A very good stout", price: 3.50, availability: 0, stock_qty: 4)
-article3 = Article.create!(article_description: "A very good dark beer", price: 4.50, availability: 1, stock_qty: 3)
-article4 = Article.create!(article_description: "A very good IPA", price: 5.50, availability: 0, stock_qty: 6)
+item1 = Item.create!(description: "A very good lager", price: 2.50)
+item2 = Item.create!(description: "A very good stout", price: 3.50)
+item3 = Item.create!(description: "A very good dark beer", price: 4.50)
+item4 = Item.create!(description: "A very good IPA", price: 5.50)
 
 p "Seeds done, dude...."
