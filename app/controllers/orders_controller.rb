@@ -3,10 +3,10 @@ class OrdersController < ApplicationController
     @orders = Order.all
   end
 
-  # def new
-  #   @order = Order.new
-  #   @order.user = current_user
-  # end
+  def new
+    @order = Order.new
+    @order.user = current_user
+  end
 
   def create
     @order = current_order
@@ -22,12 +22,12 @@ class OrdersController < ApplicationController
   end
 
   def show
-
+    @order = Order.find(params[:id])
   end
 
   private
 
   def order_params
-    params.require(:order).permit(:user_id, :item_id, :sub_total, :shipping, :tax, :total)
+    params.require(:order).permit(:user_id, :item_id, :sub_total, :shipping, :quantity, :total)
   end
 end

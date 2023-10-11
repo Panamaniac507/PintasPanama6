@@ -6,12 +6,14 @@ class Order < ApplicationRecord
   #   item.price
   # end
 
-  def sub_total
-    order.collect{|order| order.valid? ? order.item.price * order.quantity : 0}.sum
+  def quantity
+    quantity = 0
+    quantity +=1
+    quantity
   end
 
-  def tax
-    0.10 * sub_total
+  def sub_total
+    order.collect{|order| order.valid? ? order.item.price * order.quantity : 0}.sum
   end
 
   def shipping
@@ -23,7 +25,7 @@ class Order < ApplicationRecord
   end
 
   def total
-    sub_total + tax + shipping
+    sub_total + shipping
   end
 
 end
